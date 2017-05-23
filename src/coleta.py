@@ -10,7 +10,7 @@ class TwitterListener(StreamListener):
     # metodo de inicializacao
     def __init__(self):
         self.cont_tweet = 0
-        self.max_tweets = 500
+        self.max_tweets = 100
 
     def on_data(self, data):
         # incrementa o contador de tweets
@@ -27,7 +27,8 @@ class TwitterListener(StreamListener):
             # cria o objeto writer para escrever no arquivo
             writer = csv.writer(meu_arquivo)
             # escreve os dados dos campos 'created_at' e 'text' no arquivo csv
-            writer.writerow([tweet.get('id'), tweet.get('text'), tweet.get('created_at'), user.get('id_str')])
+            writer.writerow([tweet.get('id'), tweet.get('created_at'), tweet.get('text'), user.get('id_str'),
+                             user.get('name'), user.get('screen_name'), user.get('followers_count'), user.get('lang')])
 
             # fecha a referencia para o arquivo
             meu_arquivo.close()
@@ -54,7 +55,8 @@ def coletar_tweets():
     oauth.set_access_token(access_token, access_token_secret)
 
     stream = Stream(oauth, tl)
-    stream.filter(track=['#ForaTemer', '#LavaJato', '#DiretasJa', '@jairbolsonaro', '@dilmabr'])
+    stream.filter(track=['@jairbolsonaro', '@dilmabr', '@jdoriajr', '@AecioNeves', '@EduardoJorge43', '@silva_marina',
+                         '@lucianagenro', '@renancalheiros'])
 
 
 # chamada da funcao coletar_tweets()
