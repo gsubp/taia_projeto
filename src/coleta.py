@@ -20,7 +20,7 @@ class TwitterListener(StreamListener):
             # converte o tweet para o formato json
             tweet = json.loads(data)
             user = tweet.get('user')
-            print ("id: %i texto: %s" % (tweet.get('id'), tweet.get('text')))
+            print ("%i id: %i texto: %s" % (self.cont_tweet, tweet.get('id'), tweet.get('text')))
 
             # cria e carrega o arquivo 'twitter_data_csv.csv'
             meu_arquivo = open('twitter_data.csv', mode='a', encoding='utf-8')
@@ -54,7 +54,7 @@ def coletar_tweets():
     oauth.set_access_token(access_token, access_token_secret)
 
     stream = Stream(oauth, tl)
-    stream.filter(track=['#ForaTemer', '#LavaJato', 'jairbolsonaro', 'dilmabr'])
+    stream.filter(track=['#ForaTemer', '#LavaJato', '#DiretasJa', '@jairbolsonaro', '@dilmabr'])
 
 
 # chamada da funcao coletar_tweets()
