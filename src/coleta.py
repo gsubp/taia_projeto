@@ -10,7 +10,7 @@ class TwitterListener(StreamListener):
     # metodo de inicializacao
     def __init__(self):
         self.cont_tweet = 0
-        self.max_tweets = 100
+        self.max_tweets = 500
 
     def on_data(self, data):
         # incrementa o contador de tweets
@@ -25,7 +25,7 @@ class TwitterListener(StreamListener):
             # cria e carrega o arquivo 'twitter_data_csv.csv'
             meu_arquivo = open('twitter_data.csv', mode='a', encoding='utf-8')
             # cria o objeto writer para escrever no arquivo
-            writer = csv.writer(meu_arquivo)
+            writer = csv.writer(meu_arquivo, del)
             # escreve os dados dos campos 'created_at' e 'text' no arquivo csv
             writer.writerow([tweet.get('id'), tweet.get('created_at'), tweet.get('text'), user.get('id_str'),
                              user.get('name'), user.get('screen_name'), user.get('followers_count'), user.get('lang')])
